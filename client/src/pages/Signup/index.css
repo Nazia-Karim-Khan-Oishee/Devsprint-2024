@@ -1,0 +1,20 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #b1d2f3, #fab79e);
+}
+
+.signup-form {
+  background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); /* Slight shadow for the glass effect */
+  display: flex; /* Add display flex */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Vertically center children */
+  align-items: center;
+}
+
+/* Additional styles for Form components if needed */
