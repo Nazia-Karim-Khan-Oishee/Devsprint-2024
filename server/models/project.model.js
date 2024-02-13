@@ -5,24 +5,18 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  owners: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  contributors: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  moderators: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
+  owners: {
+    type: [String],
+    default: [],
+  },
+  contributors: {
+    type: [String],
+    default: [],
+  },
+  moderators: {
+    type: [String],
+    default: [],
+  },
   description: {
     type: String,
     required: true,

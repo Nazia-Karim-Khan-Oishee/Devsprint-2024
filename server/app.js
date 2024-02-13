@@ -3,13 +3,15 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
+const ProjectRoutes = require("./routes/project.route");
 
 const corsOptions = {
-  origin: "http://localhost:3000", // frontend URI (ReactJS)
+  origin: "http://localhost:3000",
 };
 
 app.use(express.json());
 app.use(cors(corsOptions));
+app.use("/projects", ProjectRoutes);
 
 mongoose
   .connect(process.env.ATLAS_URI)
@@ -19,9 +21,5 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
-
-app.get("/", (req, res) => {
-  res.status(201).json({ message: "Connected to Backend!" });
-});
 
 module.exports = app;

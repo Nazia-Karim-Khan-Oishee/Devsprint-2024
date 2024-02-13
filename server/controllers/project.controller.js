@@ -18,6 +18,7 @@ const User = require("../models/user.model.js");
 const getProjects = async (req, res) => {
   try {
     const projects = await Project.find();
+    console.log(projects);
     res.status(200).json(projects);
   } catch (err) {
     res.status(500).json(err);
@@ -55,11 +56,12 @@ const getProjectsBySkill = async (req, res) => {
 
 const getProjectsOwnedByUser = async (req, res) => {
   try {
-    const user = req.query.user;
+    const user = req.params.id;
     const projects = await Project.find({ owners: user });
+
     res.status(200).json(projects);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(404).json(err);
   }
 };
 
