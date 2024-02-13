@@ -3,31 +3,27 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Link } from "react-router-dom";
+import { useLogin } from "../../hooks/useLogin";
 
 import "./index.css";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { login, error, isLoading } = useLogin();
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
-  };
-
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Perform login logic here
-    console.log("Username:", username);
-    console.log("Password:", password);
+    await login(email, password);
   };
 
   return (
@@ -39,7 +35,7 @@ const LoginPage = () => {
             <Form.Control
               type="email"
               placeholder="Enter email"
-              onChange={handleUsernameChange}
+              onChange={(e) => setEmail(e.target.value)}
               autoComplete="email"
             />
           </Form.Group>
@@ -59,9 +55,16 @@ const LoginPage = () => {
               </Button>
             </InputGroup>
           </Form.Group>
-          <Button variant="primary" type="submit" className="mb-3">
+          <Button
+            variant="primary"
+            type="submit"
+            className="mb-3"
+            disabled={isLoading}
+            onClick={handleSubmit}
+          >
             Login
           </Button>
+          {error && <div className="error">{error}</div>}
         </Form>
         <Link to="/signup">
           <Button variant="link">Don't have an account? Signup here</Button>

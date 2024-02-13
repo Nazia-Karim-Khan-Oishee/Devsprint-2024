@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+const authRoutes = require("./routes/auth.routes");
 require("dotenv").config();
 
 const corsOptions = {
@@ -23,5 +24,6 @@ mongoose
 app.get("/", (req, res) => {
   res.status(201).json({ message: "Connected to Backend!" });
 });
+app.use("/auth", authRoutes);
 
 module.exports = app;
